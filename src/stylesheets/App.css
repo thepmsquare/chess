@@ -1,0 +1,38 @@
+.chess-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+.chess-square-bg {
+  width: 10vmin;
+  height: 10vmin;
+  font-size: 2rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chess-square-bg-black {
+  background-color: #5c4433;
+}
+.chess-square-bg-white {
+  background-color: #f3dcbb;
+}
+.chess-square-team-black {
+  color: black;
+}
+.chess-square-team-white {
+  color: white;
+}
+.chess-square-team-white svg {
+  stroke: black;
+  stroke-width: 0.5rem;
+}
+.chess-square-team-black svg {
+  stroke: white;
+  stroke-width: 0.5rem;
+}
+.chess-square-highlighted {
+  background-color: pink;
+}
