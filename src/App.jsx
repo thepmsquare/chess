@@ -9,6 +9,8 @@ import {
   faChessPawn,
 } from "@fortawesome/free-solid-svg-icons";
 import "./stylesheets/App.css";
+let letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 class App extends Component {
   constructor(props) {
     super(props);
@@ -333,6 +335,38 @@ class App extends Component {
           `${position.slice(0, 1)}${parseInt(position.slice(1, 2)) + 1}`,
           `${position.slice(0, 1)}${parseInt(position.slice(1, 2)) + 2}`,
         ];
+        // is enemy on left front
+        if (
+          letters[letters.findIndex((ele) => ele === position.slice(0, 1)) - 1]
+        ) {
+          let leftFrontPosition = `${
+            letters[
+              letters.findIndex((ele) => ele === position.slice(0, 1)) - 1
+            ]
+          }${parseInt(position.slice(1, 2)) + 1}`;
+          if (
+            this.state.grid[leftFrontPosition].team !== this.state.turn &&
+            !this.state.grid[leftFrontPosition].isEmpty
+          ) {
+            nextHighlights.push(leftFrontPosition);
+          }
+        }
+        // is enemy on right front
+        if (
+          letters[letters.findIndex((ele) => ele === position.slice(0, 1)) + 1]
+        ) {
+          let rightFrontPosition = `${
+            letters[
+              letters.findIndex((ele) => ele === position.slice(0, 1)) + 1
+            ]
+          }${parseInt(position.slice(1, 2)) + 1}`;
+          if (
+            this.state.grid[rightFrontPosition].team !== this.state.turn &&
+            !this.state.grid[rightFrontPosition].isEmpty
+          ) {
+            nextHighlights.push(rightFrontPosition);
+          }
+        }
 
         this.setState((oldState) => {
           let oldGridCopy = JSON.parse(JSON.stringify(oldState.grid));
@@ -345,7 +379,38 @@ class App extends Component {
       } else {
         let nextHighlights = [
           `${position.slice(0, 1)}${parseInt(position.slice(1, 2)) + 1}`,
-        ];
+        ]; // is enemy on left front
+        if (
+          letters[letters.findIndex((ele) => ele === position.slice(0, 1)) - 1]
+        ) {
+          let leftFrontPosition = `${
+            letters[
+              letters.findIndex((ele) => ele === position.slice(0, 1)) - 1
+            ]
+          }${parseInt(position.slice(1, 2)) + 1}`;
+          if (
+            this.state.grid[leftFrontPosition].team !== this.state.turn &&
+            !this.state.grid[leftFrontPosition].isEmpty
+          ) {
+            nextHighlights.push(leftFrontPosition);
+          }
+        }
+        // is enemy on right front
+        if (
+          letters[letters.findIndex((ele) => ele === position.slice(0, 1)) + 1]
+        ) {
+          let rightFrontPosition = `${
+            letters[
+              letters.findIndex((ele) => ele === position.slice(0, 1)) + 1
+            ]
+          }${parseInt(position.slice(1, 2)) + 1}`;
+          if (
+            this.state.grid[rightFrontPosition].team !== this.state.turn &&
+            !this.state.grid[rightFrontPosition].isEmpty
+          ) {
+            nextHighlights.push(rightFrontPosition);
+          }
+        }
         this.setState((oldState) => {
           let oldGridCopy = JSON.parse(JSON.stringify(oldState.grid));
           nextHighlights.forEach((element) => {
@@ -359,9 +424,6 @@ class App extends Component {
     }
   }
   render = () => {
-    let letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
-    let numbers = [1, 2, 3, 4, 5, 6, 7, 8];
-
     return (
       <div className="chess-container">
         {numbers.reverse().map((number, yIndex) =>
